@@ -22,7 +22,11 @@ class SplashScreen extends StatelessWidget {
           width: Get.width,
           height: Get.height,
           child: Center(
-            child: Image.asset("assets/img/img_logo_blue.png", width : wValue(233)),
+            child: //Image.asset("assets/img/img_logo_blue.png", width : wValue(233))
+            Text(
+              "myFina",
+              style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold, color: colorPrimary),
+            ),
           ),
         ),
       ),

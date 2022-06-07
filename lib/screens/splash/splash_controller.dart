@@ -1,6 +1,6 @@
 import 'dart:async';
-import 'package:accesive_id/helper/global_helper.dart';
-import 'package:accesive_id/screens/login/login_screen.dart';
+import 'package:my_fina/helper/global_helper.dart';
+import 'package:my_fina/screens/login/login_screen.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
@@ -16,7 +16,7 @@ class SplashController extends GetxController {
   void nextPage() {
     var duration = const Duration(seconds: 4);
     Timer(duration, () {
-      goToPage(const LoginScreen(), context: Get.context!, dismissPage: true);
+      goToPage(LoginScreen(), context: Get.context!, dismissPage: true);
       // goToPage(const PascaRegisterScreen(), context: Get.context!, dismissPage: true);
     });
   }

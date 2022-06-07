@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -30,7 +31,7 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     var locale = const Locale('en', 'US');
     Get.updateLocale(locale);
-    // Firebase.initializeApp();
+    Firebase.initializeApp();
   }
 
   @override
