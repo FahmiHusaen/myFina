@@ -2,7 +2,10 @@
 //import 'package:my_fina/data/endpoint.dart';
 //import 'package:my_fina/data/model/response/base_response.dart';
 //import 'package:my_fina/data/model/response/login_response.dart';
+import 'dart:async';
+
 import 'package:my_fina/helper/global_helper.dart';
+import 'package:my_fina/screens/main/main_screen.dart';
 //import 'package:my_fina/helper/key_storage.dart';
 //import 'package:my_fina/screens/main/main_screen.dart';
 //import 'package:my_fina/screens/pasca_register/pasca_register_screen.dart';
@@ -30,18 +33,42 @@ class LoginController extends GetxController {
   RxInt step = 0.obs;
   RxString currentPhoneNumber = "".obs;
 
+  RxInt resendTime = 60.obs;
+  RxInt otpTimeoutDuration = 60.obs;
+  RxString currentVerifyCode = "".obs;
+
   @override
   void onInit() {
 
     if(kDebugMode){
       phoneTxtController.value.text = "81215747812";
-      otpTxtController.value.text = "masukaja";
     }
 
     super.onInit();
   }
 
+  void confirmOtp() async {
+    isLoading.value = true;
+    String pin = otpTxtController.value.text;
+    try {
+      await FirebaseAuth.instance
+          .signInWithCredential(PhoneAuthProvider.credential(
+          verificationId: currentVerifyCode.value, smsCode: pin))
+          .then((value) async {
+        isLoading.value = false;
+        if (value.user != null) {
+          goToPage(MainScreen(), context: Get.context!, dismissPage: true);
+          //successToast(msg: "Login with phone number success");
+        }
+      });
+    } catch (e) {
+      isLoading.value = false;
+      errorToast(msg: "Invalid OTP");
+    }
+  }
+
   login(){
+    isLoading.value = true;
     currentPhoneNumber.value = "+62" + phoneTxtController.value.text;
     verifyPhone(currentPhoneNumber.value);
     /*
@@ -69,10 +96,20 @@ class LoginController extends GetxController {
     }
   }
 
-  void apiLogin() async {
-    isLoading.value = true;
+  void resendOtpTimer() async {
+    resendTime.value =  otpTimeoutDuration.value;
+    const oneSec = const Duration(seconds: 1);
+    Timer.periodic(
+      oneSec,
+          (Timer timer) {
+        if (resendTime == 0) {
+          timer.cancel();
+        } else {
+          resendTime--;
+        }
+      },
+    );
   }
-
 
   verifyPhone(String phoneNumber) async {
     await FirebaseAuth.instance.verifyPhoneNumber(
@@ -81,24 +118,30 @@ class LoginController extends GetxController {
           await FirebaseAuth.instance
               .signInWithCredential(credential)
               .then((value) async {
+            isLoading.value = false;
             if (value.user != null) {
               successToast(msg: "Login success");
             }
           });
         },
         verificationFailed: (FirebaseAuthException e) {
+          isLoading.value = false;
           print(e.message);
         },
-        codeSent: (String verficationID, int? resendToken) {
+        codeSent: (String verificationID, int? resendToken) {
+          isLoading.value = false;
+          currentVerifyCode.value = verificationID;
           successToast(msg: "OTP sent");
+          resendOtpTimer();
           if(step.value == 0) {
             step.value++;
           }
         },
         codeAutoRetrievalTimeout: (String verificationID) {
           errorToast(msg: "OTP retrieval timeout");
+          currentVerifyCode.value = verificationID;
         },
-        timeout: Duration(seconds: 120));
+        timeout: Duration(seconds: otpTimeoutDuration.value));
   }
 
   @override

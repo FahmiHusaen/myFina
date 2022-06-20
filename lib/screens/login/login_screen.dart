@@ -106,7 +106,7 @@ class LoginScreen extends StatelessWidget {
             }),
         hSpace(34),
         Button("Konfirmasi", colorPrimaryDark,  !controller.isLoading.value, (){
-          controller.login();
+          controller.confirmOtp();
         }, height: hValue(57), isLoading: controller.isLoading.value, fontSize: fontSize(18), radius: wValue(20)),
         hSpace(34),
         Center(
@@ -120,11 +120,13 @@ class LoginScreen extends StatelessWidget {
         Center(
           child: RichText(
               text: TextSpan(
-                  text: 'Kirim ulang',
+                  text: (controller.resendTime.value > 0) ? controller.resendTime.value.toString() : 'Kirim ulang',
                   style: regularTextFont.copyWith(fontSize: fontSize(18), color: colorPrimary),
                   recognizer: TapGestureRecognizer()
                     ..onTap = () {
-                      controller.login();
+                      if(controller.resendTime.value == 0){
+                        controller.login();
+                      }
                     }
               )
           ),
