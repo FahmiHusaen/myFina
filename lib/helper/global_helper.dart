@@ -211,21 +211,21 @@ Future<File> cropImage({required String path}) async {
       sourcePath: path,
       compressQuality: 50,
       aspectRatioPresets: [
-        CropAspectRatioPreset.square,
+        CropAspectRatioPreset.original,
         // CropAspectRatioPreset.ratio3x2,
         // CropAspectRatioPreset.original,
         // CropAspectRatioPreset.ratio4x3,
         // CropAspectRatioPreset.ratio16x9
       ],
       androidUiSettings: AndroidUiSettings(
-          toolbarTitle: 'Accessive',
+          toolbarTitle: 'My Fina',
           toolbarColor: colorPrimary,
           toolbarWidgetColor: Colors.white,
           initAspectRatio: CropAspectRatioPreset.square,
           lockAspectRatio: true),
       iosUiSettings: const IOSUiSettings(
           minimumAspectRatio: 1.0,
-          title: "Accessive"
+          title: "My Fina"
       )
   );
 
@@ -252,22 +252,40 @@ Future<File> cropImageWithOption({required String path}) async {
 }
 
 imgBill(String url, double width, double height){
-  return Container(
+  return Container( 
     width: width,
     height: height,
     child: url.contains("http")
-        ? Image.network(
+        ? ClipRRect(
+      borderRadius: BorderRadius.circular(20),
+          child: Image.network(
       url,
       errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace){
-        return Text("An error occurred loading " + url);
+          return Text("An error occurred loading " + url);
       },
-    )
-        : Image.file(
-        File(url),
-      errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace){
-        return Text("An error occurred loading image");
-      },
+      fit: BoxFit.cover,
     ),
+        ) :
+    url.isEmpty
+        ? Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        color: Colors.black38
+      ),
+      width: width,
+      height: height,
+      //color: Colors.black12,
+    )
+        : ClipRRect(
+      borderRadius: BorderRadius.circular(20),
+          child: Image.file(
+          File(url),
+      errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace){
+          return Text("An error occurred loading image");
+      },
+      fit: BoxFit.cover,
+    ),
+        ),
   );
 }
 

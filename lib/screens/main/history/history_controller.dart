@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'dart:ffi';
+//import 'dart:ffi';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -45,11 +45,12 @@ class HistoryController extends GetxController {
   Future<void> sendSample(){
     int randomAmount = Random().nextInt(100) * 10000;
     bool randomIncome = Random().nextBool();
-    TransactionModel transactionModelSample1 = new TransactionModel.def(userId, "Susu Appeton", "krn",
+    String newId = uuid.v4();
+    TransactionModel transactionModelSample1 = new TransactionModel.def(newId, userId, "Susu Appeton", "krn",
         "Loreup Ipsum Dolor sir amet", randomAmount, randomIncome, "xxx.com");
 
     return transc
-        .doc(uuid.v4())
+        .doc(newId)
         .set(transactionModelSample1)
         .then((value) => successToast(msg: "Berhasil ditambahkan"))
         .catchError((onError) => errorToast(msg: "Gagal ditambahkan : " + onError.toString()));

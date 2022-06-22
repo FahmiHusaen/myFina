@@ -79,4 +79,46 @@ chooseImageDialog(BuildContext context, {Function? onClick}) {
       });
 }
 
+showConfirmDialog({String? title, String? content, String? btnPos, String? btnNeg, Function? onClickBtnPos, Function? onClickBtnNeg}){
+  return showDialog(
+      context: Get.context!,
+      builder: (BuildContext context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(wValue(12))),
+          child: Wrap(
+            children: [
+              Container(
+                color: bgPage(),
+                padding: EdgeInsets.only(top: wValue(15), bottom: wValue(15), left: wValue(25), right: wValue(25)),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    if(title != null) Text(title, style: boldTextFont.copyWith(fontSize: fontSize(16), color: textColor()),),
+                    hSpace(10),
+                    Text("$content", style: regularTextFont.copyWith(fontSize: fontSize(14), color: textColor()),),
+                    hSpace(10),
+                    Row(
+                      children: [
+                        Expanded(child: Button("$btnPos", colorPrimary, true, (){
+                          Get.back();
+                          onClickBtnPos!();
+                        }, height: hValue(40)), flex: 1,),
+                        wSpace(10),
+                        Expanded(child: ButtonBorder("$btnNeg", colorPrimary,  (){
+                          Get.back();
+                          onClickBtnNeg!();
+                        }, height: hValue(40)), flex: 1,),
+                      ],
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
+        );
+      });
+}
+
 

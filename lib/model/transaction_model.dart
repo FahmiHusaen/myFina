@@ -5,6 +5,7 @@ part 'transaction_model.g.dart';
 
 @JsonSerializable()
 class TransactionModel {
+  String? transaction_id;
   String? user_id;
   String? name;
   String? category_id;
@@ -14,7 +15,8 @@ class TransactionModel {
   String? invoice_photo_url;
   DateTime? timestamp;
 
-  TransactionModel.def(String user_id, String name, String category_id, String desc, int amount, bool is_income, String invoice_photo_url){
+  TransactionModel.def(String transaction_id, String user_id, String name, String category_id, String desc, int amount, bool is_income, String invoice_photo_url){
+    this.transaction_id = transaction_id;
     this.user_id = user_id;
     this.name = name;
     this.category_id = category_id;

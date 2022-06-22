@@ -8,6 +8,7 @@ part of 'transaction_model.dart';
 
 TransactionModel _$TransactionModelFromJson(Map<String, dynamic> json) {
   return TransactionModel()
+    ..transaction_id = json['transaction_id'] as String?
     ..user_id = json['user_id'] as String?
     ..name = json['name'] as String?
     ..category_id = json['category_id'] as String?
@@ -22,6 +23,7 @@ TransactionModel _$TransactionModelFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$TransactionModelToJson(TransactionModel instance) =>
     <String, dynamic>{
+      'transaction_id': instance.transaction_id,
       'user_id': instance.user_id,
       'name': instance.name,
       'category_id': instance.category_id,
