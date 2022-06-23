@@ -12,7 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
+//import 'package:image_picker/image_picker.dart';
 import 'package:simple_shadow/simple_shadow.dart';
 import 'package:path/path.dart' as path;
 
@@ -28,7 +28,7 @@ class CreateTransactionScreen extends StatefulWidget {
 class _CreateTransactionScreenState extends State<CreateTransactionScreen> {
 
   var controller = CreateTransactionController();
-  final ImagePicker _picker = ImagePicker();
+  //final ImagePicker _picker = ImagePicker();
 
   @override
   void initState() {
@@ -65,7 +65,7 @@ class _CreateTransactionScreenState extends State<CreateTransactionScreen> {
       children: [
         hSpace(45),
         Container(
-          child: Text(controller.isIncome.value ? "Buat Transaksi Pemasukan." : "Buat Transaksi Pengeluaran.",
+          child: Text(controller.isIncome.value ? 'create_transaction_title'.tr + " " + 'income_btn'.tr + '.' : 'create_transaction_title'.tr + " " + 'outcome_btn'.tr + '.',
             style: boldTextFont.copyWith(fontSize: fontSize(27),
               color:  Get.isPlatformDarkMode ? Colors.white : black1),),
           //margin: EdgeInsets.only(right: wValue(15)),
@@ -89,7 +89,7 @@ class _CreateTransactionScreenState extends State<CreateTransactionScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
 
-              Text("Nama Transaksi", style: regularTextFont.copyWith(fontSize: fontSize(14), color: textColor()),),
+              Text('name_transaction_form'.tr, style: regularTextFont.copyWith(fontSize: fontSize(14), color: textColor()),),
               hSpace(5),
               EditText(controller: controller.nameTxtCtrl.value, textSize: fontSize(14),
                 borderColor: Get.isPlatformDarkMode ? Colors.white : black3,
@@ -104,7 +104,7 @@ class _CreateTransactionScreenState extends State<CreateTransactionScreen> {
                 bgColor: Get.isPlatformDarkMode ? const Color(0xFF404040) : const Color(0xFFF9F9F9),),
 
               hSpace(20),
-              Text("Kategori", style: regularTextFont.copyWith(fontSize: fontSize(14), color: textColor()),),
+              Text('category_form'.tr, style: regularTextFont.copyWith(fontSize: fontSize(14), color: textColor()),),
               hSpace(5),
               DropdownSpinner(
                 bgColor: const Color(0xFFF9F9F9),
@@ -125,7 +125,7 @@ class _CreateTransactionScreenState extends State<CreateTransactionScreen> {
               ),
 
               hSpace(20),
-              Text("Nominal", style: regularTextFont.copyWith(fontSize: fontSize(14), color: textColor()),),
+              Text('amount_form'.tr, style: regularTextFont.copyWith(fontSize: fontSize(14), color: textColor()),),
               hSpace(5),
               EditText(controller: controller.amountTxtCtrl.value, textSize: fontSize(14),
                   borderColor: Get.isPlatformDarkMode ? Colors.white : black3,
@@ -139,7 +139,7 @@ class _CreateTransactionScreenState extends State<CreateTransactionScreen> {
                   }),
 
               hSpace(20),
-              Text("Deskripsi", style: regularTextFont.copyWith(fontSize: fontSize(14), color: textColor()),),
+              Text('desc_form'.tr, style: regularTextFont.copyWith(fontSize: fontSize(14), color: textColor()),),
               hSpace(5),
               EditText(controller: controller.descTxtCtrl.value, textSize: fontSize(14),
                 borderColor: Get.isPlatformDarkMode ? Colors.white : black3,
@@ -205,11 +205,11 @@ class _CreateTransactionScreenState extends State<CreateTransactionScreen> {
         Container(
           child: Row(
             children: [
-              Expanded(child: ButtonBorder("Batal", Get.isPlatformDarkMode ? colorPrimary : Colors.grey, (){
+              Expanded(child: ButtonBorder('cancel_btn'.tr, Get.isPlatformDarkMode ? colorPrimary : Colors.grey, (){
                 controller.step.value = 0;
               }, radius: wValue(25),  height: hValue(40), fontSize: fontSize(16), fontColor: colorPrimary), flex: 1,),
               wSpace(10),
-              Expanded(child: Button("Simpan", colorPrimary, true, (){
+              Expanded(child: Button('save_btn'.tr, colorPrimary, true, (){
                 //controller.editProfile();
                 controller.sendNewData();
               },  height: hValue(40),), flex: 1,)
@@ -229,7 +229,7 @@ class _CreateTransactionScreenState extends State<CreateTransactionScreen> {
       children: [
         hSpace(45),
         Container(
-          child: Text("Buat Transaksi.", style: boldTextFont.copyWith(fontSize: fontSize(27),
+          child: Text('create_transaction_title'.tr + '.', style: boldTextFont.copyWith(fontSize: fontSize(27),
               color:  Get.isPlatformDarkMode ? Colors.white : black1),),
           //margin: EdgeInsets.only(right: wValue(15)),
           width: Get.width,
@@ -249,7 +249,7 @@ class _CreateTransactionScreenState extends State<CreateTransactionScreen> {
               Container(
                 child: Row(
                   children: [
-                    Expanded(child: Button("Pengeluaran --", Colors.red, true, (){
+                    Expanded(child: Button('outcome_btn'.tr + ' --', Colors.red, true, (){
                       controller.step.value = 1;
                       controller.isIncome.value = false;
                       controller.initCategory();
@@ -262,9 +262,9 @@ class _CreateTransactionScreenState extends State<CreateTransactionScreen> {
               Container(
                 child: Row(
                   children: [
-                    Expanded(child: Button("Pemasukan ++", Colors.green, true, (){
+                    Expanded(child: Button('income_btn'.tr + '++', Colors.green, true, (){
                       controller.step.value = 1;
-                      controller.isIncome.value = false;
+                      controller.isIncome.value = true;
                       controller.initCategory();
                     },  height: hValue(40),), flex: 1,)
                   ],
@@ -275,7 +275,7 @@ class _CreateTransactionScreenState extends State<CreateTransactionScreen> {
               Container(
                 child: Row(
                   children: [
-                    Expanded(child: ButtonBorder("Batal", Get.isPlatformDarkMode ? colorPrimary : Colors.grey, (){
+                    Expanded(child: ButtonBorder('cancel_btn'.tr, Get.isPlatformDarkMode ? colorPrimary : Colors.grey, (){
                       onWillPop();
                     }, radius: wValue(25),  height: hValue(40), fontSize: fontSize(16), fontColor: colorPrimary), flex: 1,),
                     wSpace(10),

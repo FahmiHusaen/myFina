@@ -9,6 +9,7 @@ class TransactionModel {
   String? user_id;
   String? name;
   String? category_id;
+  String? category_name;
   String? desc;
   int? amount;
   bool? is_income;
@@ -25,6 +26,7 @@ class TransactionModel {
     this.is_income = is_income;
     this.invoice_photo_url = invoice_photo_url;
     this.timestamp = DateTime.now();
+    this.category_name = "";
   }
 
   TransactionModel();

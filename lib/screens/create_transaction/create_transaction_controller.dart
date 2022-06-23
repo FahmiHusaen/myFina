@@ -14,7 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:dio/dio.dart' as d;
-import 'package:image_picker/image_picker.dart';
+//import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
 //import 'package:firebase_storage/firebase_storage.dart';
 
@@ -34,7 +34,7 @@ class CreateTransactionController extends GetxController {
     toFirestore: (CategoryModel, _) => CategoryModel.toJson(),
   );
   RxList<CategoryModel> categoryList = <CategoryModel>[].obs;
-  CategoryModel selectedCategory = new CategoryModel.def("blank", "xxxx", "Pilih Kategori");
+  CategoryModel selectedCategory = new CategoryModel.def("blank", "xxxx", 'choose_category'.tr);
 
   var nameTxtCtrl = TextEditingController().obs;
   var amountTxtCtrl = TextEditingController().obs;
@@ -67,7 +67,7 @@ class CreateTransactionController extends GetxController {
 
   readCategory() async {
     categoryList.value = <CategoryModel>[];
-    selectedCategory = new CategoryModel.def("blank", "xxxx", "Pilih Kategori");
+    selectedCategory = new CategoryModel.def("blank", "xxxx", 'choose_category'.tr);
     categoryList.add(selectedCategory);
 
     await categoryRef
@@ -99,11 +99,12 @@ class CreateTransactionController extends GetxController {
     if(isNameValid.value && isAmountValid.value && isCategoryValid.value){
       createData(
           (){
-            successToast(msg: "Berhasil ditambahkan");
+            successToast(msg: 'data_add_success'.tr);
+            Navigator.pop(Get.context!, true);
           }
       );
     } else {
-      errorToast(msg: "Data tidak valid");
+      errorToast(msg: 'data_not_valid'.tr);
     }
   }
 
@@ -121,14 +122,14 @@ class CreateTransactionController extends GetxController {
           }
         })
         .catchError((onError) {
-          errorToast(msg: "Data gagal ditambahkan : " + onError.toString());
+          errorToast(msg: 'data_failed_added'.tr + onError.toString());
         });
   }
 
   void validatingName() {
     isNameValid.value = false;
     if (nameTxtCtrl.value.text.toString().isEmpty) {
-      errorName.value = "Nama tidak boleh kosong";
+      errorName.value = 'name_cant_null'.tr;
     } else {
       errorName.value = "";
       isNameValid.value = true;
@@ -139,13 +140,13 @@ class CreateTransactionController extends GetxController {
     isAmountValid.value = false;
     if(amountTxtCtrl.value.text.toString().isNotEmpty){
       if( amountTxtCtrl.value.text.isNotEmpty && amountTxtCtrl.value.text.length > 9){
-        errorAmount.value = "Harus kurang dari 1 milyar";
+        errorAmount.value = 'must_less_1mil'.tr;
       }else{
         errorAmount.value = "";
       isAmountValid.value = true;
     }
   }else{
-  errorAmount.value = "Nominal tidak boleh kosong";
+  errorAmount.value = 'amount_cant_null'.tr;
     }
   }
 
@@ -155,7 +156,7 @@ class CreateTransactionController extends GetxController {
       isCategoryValid.value = true;
     } else {
       isCategoryValid.value = false;
-      errorToast(msg: "Kategori belum dipilih");
+      errorToast(msg: 'category_not_choosed'.tr);
     }
   }
 

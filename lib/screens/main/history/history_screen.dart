@@ -43,7 +43,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
               children: [
                 Expanded(child: Container(
                   margin: EdgeInsets.only(right: wValue(15)),
-                  child: Text("Riwayat Transaksi.", style: boldTextFont.copyWith(fontSize: fontSize(27),
+                  child: Text('history_title'.tr, style: boldTextFont.copyWith(fontSize: fontSize(27),
                       color:  Get.isPlatformDarkMode ? Colors.white : black1),),
                 ), flex: 1,),
                 Container(
@@ -87,8 +87,8 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                     ],
                                   ),
                                   Text(item.name.toString(), style: boldTextFont.copyWith(fontSize: fontSize(16)),),
-                                  Text(item.category_id.toString(), style: boldTextFont.copyWith(fontSize: fontSize(14)),),
-                                  Text(item.desc.toString(), style: boldTextFont.copyWith(fontSize: fontSize(14)),),
+                                  Text(item.category_name.toString(), style: boldTextFont.copyWith(fontSize: fontSize(14)),),
+                                  Visibility(visible: (item.desc.toString()!=""), child: Text(item.desc.toString(), style: boldTextFont.copyWith(fontSize: fontSize(14)),)),
                                 ],
                               ),
                             ),

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_fina/helper/spacing.dart';
 import 'package:my_fina/screens/category_list/category_list_screen.dart';
+import 'package:my_fina/screens/language_list/language_list_screen.dart';
 import 'package:my_fina/screens/main/history/history_controller.dart';
 import 'package:my_fina/widget/button.dart';
 import 'package:my_fina/widget/dialog.dart';
@@ -54,7 +55,7 @@ class _ConfigurationScreenState extends State<ConfigurationScreen> {
             ),
             hSpace(29),
             itemButton("Daftar Kategori", action: (){goToPage(CategoryListScreen(), context: context);}),
-            itemButton("Atur Limit"),
+            itemButton("Bahasa", action: (){goToPage(LanguageListScreen(), context: context);}),
             hSpace(15),
             Container(
               child: ButtonBorder("Keluar", Get.isPlatformDarkMode ? colorPrimary : Colors.grey, (){

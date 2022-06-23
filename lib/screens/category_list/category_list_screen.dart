@@ -8,6 +8,7 @@ import 'package:my_fina/screens/category_list/category_list_controller.dart';
 import 'package:my_fina/screens/create_category/create_category_screen.dart';
 import 'package:my_fina/screens/create_transaction/create_transaction_screen.dart';
 import 'package:my_fina/screens/main/history/history_controller.dart';
+import 'package:my_fina/widget/button.dart';
 import 'package:my_fina/widget/shimmer.dart';
 import 'package:simple_shadow/simple_shadow.dart';
 
@@ -31,54 +32,69 @@ class _CategoryListScreenState extends State<CategoryListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-          width: Get.width,
-          color: bgPage(),
-          child:
-          Obx(()=>
-          Container(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                hSpace(45),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Expanded(child: Container(
-                      margin: EdgeInsets.only(right: wValue(15)),
-                      child: Text("Atur Kategori.", style: boldTextFont.copyWith(fontSize: fontSize(27),
-                          color:  Get.isPlatformDarkMode ? Colors.white : black1),),
-                    ), flex: 1,),
-                    Container(
-                      child: InkWell(
-                        child: Icon(Icons.add_circle_outline),
-                        onTap: (){
-                          //controller.sendSample();
-                          goToPage(CreateCategoryScreen(), context: context);
-                        },
-                      ),
-                    )
-                  ],
-                ),
-                hSpace(29),
-                Expanded(child: controller.isLoading.value ? showShimmerList() :
-                RefreshIndicator(child: SingleChildScrollView(
-                  physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
-                  child: Column(
+      body: WillPopScope(
+        onWillPop: onWillPop,
+        child: Container(
+            width: Get.width,
+            color: bgPage(),
+            child:
+            Obx(()=>
+            Container(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  hSpace(45),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      for(var item in controller.categoryList) itemCategory(item)
+                      Expanded(child: Container(
+                        margin: EdgeInsets.only(right: wValue(15)),
+                        child: Text("Atur Kategori.", style: boldTextFont.copyWith(fontSize: fontSize(27),
+                            color:  Get.isPlatformDarkMode ? Colors.white : black1),),
+                      ), flex: 1,),
+                      Container(
+                        child: InkWell(
+                          child: Icon(Icons.add_circle_outline),
+                          onTap: (){
+                            //controller.sendSample();
+                            goToPage(CreateCategoryScreen(), context: context);
+                          },
+                        ),
+                      )
                     ],
                   ),
-                ), onRefresh: onRefresh)),
-              ],
-            ),
-            padding: EdgeInsets.only(bottom: hValue(85), left: wValue(25), right: wValue(25)),
-          )
+                  hSpace(29),
+                  Expanded(child: controller.isLoading.value ? showShimmerList() :
+                  RefreshIndicator(child: SingleChildScrollView(
+                    physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+                    child: Column(
+                      children: [
+                        for(var item in controller.categoryList) itemCategory(item)
+                      ],
+                    ),
+                  ), onRefresh: onRefresh)),
+                  Container(
+                    child: ButtonBorder('back_btn'.tr, Get.isPlatformDarkMode ? colorPrimary : Colors.grey, (){
+                      onWillPop();
+                    }, radius: wValue(25),  height: hValue(50), fontSize: fontSize(16), fontColor: colorPrimary),
+                    width: Get.width,
+                  ),
+                ],
+              ),
+              padding: EdgeInsets.only(bottom: hValue(85), left: wValue(25), right: wValue(25)),
+            )
+          ),
         ),
       ),
     );
+  }
+
+  Future<bool> onWillPop() async {
+    Navigator.pop(context, true);
+
+    return true;
   }
 
   itemCategory(CategoryModel categoryModel){

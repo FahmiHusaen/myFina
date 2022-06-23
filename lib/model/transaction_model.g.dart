@@ -12,6 +12,7 @@ TransactionModel _$TransactionModelFromJson(Map<String, dynamic> json) {
     ..user_id = json['user_id'] as String?
     ..name = json['name'] as String?
     ..category_id = json['category_id'] as String?
+    ..category_name = json['category_name'] as String?
     ..desc = json['desc'] as String?
     ..amount = json['amount'] as int?
     ..is_income = json['is_income'] as bool?
@@ -27,6 +28,7 @@ Map<String, dynamic> _$TransactionModelToJson(TransactionModel instance) =>
       'user_id': instance.user_id,
       'name': instance.name,
       'category_id': instance.category_id,
+      'category_name': instance.category_name,
       'desc': instance.desc,
       'amount': instance.amount,
       'is_income': instance.is_income,

@@ -12,7 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
+//import 'package:image_picker/image_picker.dart';
 import 'package:simple_shadow/simple_shadow.dart';
 import 'package:path/path.dart' as path;
 
@@ -28,7 +28,7 @@ class CreateTransactionScreen extends StatefulWidget {
 class _CreateTransactionScreenState extends State<CreateTransactionScreen> {
 
   var controller = CreateTransactionController();
-  final ImagePicker _picker = ImagePicker();
+  //final ImagePicker _picker = ImagePicker();
 
   @override
   void initState() {

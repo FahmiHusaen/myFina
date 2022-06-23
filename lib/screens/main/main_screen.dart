@@ -47,13 +47,13 @@ class MainScreen extends StatelessWidget {
       ),
       child: Row(
         children: [
-          itemHome("Riwayat", Icon(Icons.history_rounded, size: 25, color: Colors.white,), Icon(Icons.history_toggle_off, size: 25, color: Colors.white,), controller.currentIndex.value == 0, onClick: (){
+          itemHome('history_btn'.tr, Icon(Icons.history_rounded, size: 25, color: Colors.white,), Icon(Icons.history_toggle_off, size: 25, color: Colors.white,), controller.currentIndex.value == 0, onClick: (){
             controller.currentIndex.value = 0;
           }),
-          itemHome("Laporan", Icon(Icons.report_rounded, size: 25, color: Colors.white,), Icon(Icons.report_outlined, size: 25, color: Colors.white,), controller.currentIndex.value == 1, onClick: (){
+          itemHome('report_btn'.tr, Icon(Icons.report_rounded, size: 25, color: Colors.white,), Icon(Icons.report_outlined, size: 25, color: Colors.white,), controller.currentIndex.value == 1, onClick: (){
             controller.currentIndex.value = 1;
           }),
-          itemHome("Konfigurasi", Icon(Icons.settings_rounded, size: 25, color: Colors.white,), Icon(Icons.settings_outlined, size: 25, color: Colors.white,), controller.currentIndex.value == 2, onClick: (){
+          itemHome("conf_btn".tr, Icon(Icons.settings_rounded, size: 25, color: Colors.white,), Icon(Icons.settings_outlined, size: 25, color: Colors.white,), controller.currentIndex.value == 2, onClick: (){
             controller.currentIndex.value = 2;
           }),
         ],

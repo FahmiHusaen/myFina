@@ -25,12 +25,29 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   Locale? locale;
+  var box = GetStorage();
+
+  getCurrentLocale(){
+    if(box.read("KEY_LANG") != null && box.read("KEY_COUN") != null){
+      try {
+        //locale = box.read("KEY_LOCALE");
+        locale = Locale(box.read("KEY_LANG").toString(), box.read("KEY_COUN").toString());
+      } catch (_) {
+        locale = Locale('en', 'US');
+      }
+    } else {
+      locale = Locale('en', 'US');
+      box.write("KEY_LANG", 'en');
+      box.write("KEY_COUN", 'US');
+    }
+  }
 
   @override
   void initState(){
     super.initState();
-    var locale = const Locale('en', 'US');
-    Get.updateLocale(locale);
+    //var locale = const Locale('en', 'US');
+    getCurrentLocale();
+    Get.updateLocale(locale!);
     Firebase.initializeApp();
   }
 

@@ -12,7 +12,8 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:image_picker/image_picker.dart';
+//oi5
+// inokjuknoimport 'package:image_picker/image_picker.dart';
 import 'loading.dart';
 
 chooseImageDialog(BuildContext context, {Function? onClick}) {

@@ -24,7 +24,7 @@ class SplashScreen extends StatelessWidget {
           child: Center(
             child: //Image.asset("assets/img/img_logo_blue.png", width : wValue(233))
             Text(
-              "myFina",
+              'app_name'.tr,
               style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold, color: colorPrimary),
             ),
           ),

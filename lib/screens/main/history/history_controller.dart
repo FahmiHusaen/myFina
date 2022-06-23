@@ -68,10 +68,22 @@ class HistoryController extends GetxController {
           for (var docs in listAllDocs){
             //var dataa = docs.data() as Map<String, dynamic>;
             TransactionModel? transactionModel = docs.data() as TransactionModel?;
-            transList.add(transactionModel!);
+            addToModel(transactionModel!);
           }
           print("transactionModel length : " + transList.length.toString());
      });
+  }
+
+  addToModel(TransactionModel transactionModel) async {
+    await categoryRef
+        .doc(transactionModel.category_id)
+        .get()
+        .then((value){
+          String newName = value.get("name");
+          transactionModel.category_name = newName;
+          transList.add(transactionModel);
+    })
+        .catchError((error) => errorToast(msg: "Error add to model transcation : " + error.toString()));
   }
 
   Future<void> addSampleCategory(String newCategory){
