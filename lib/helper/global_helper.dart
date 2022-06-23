@@ -17,6 +17,36 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+String getMonth(int code){
+  if(code == 1){
+    return 'jan'.tr;
+  } else if(code == 2){
+    return 'feb'.tr;
+  } else if(code == 3){
+    return 'mar'.tr;
+  } else if(code == 4){
+    return 'apr'.tr;
+  } else if(code == 5){
+    return 'may'.tr;
+  } else if(code == 6){
+    return 'jun'.tr;
+  } else if(code == 7){
+    return 'jul'.tr;
+  } else if(code == 8){
+    return 'aug'.tr;
+  } else if(code == 9){
+    return 'sep'.tr;
+  } else if(code == 10){
+    return 'oct'.tr;
+  } else if(code == 11){
+    return 'nov'.tr;
+  } else if(code == 12){
+    return 'des'.tr;
+  } else {
+    return "";
+  }
+}
+
 goToPage(Widget page, {bool? dismissPage, bool? dismissAllPage, required BuildContext context}){
   if(dismissPage != null){
     Navigator.of(context).pushReplacement(createRoute(page));

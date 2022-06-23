@@ -53,7 +53,7 @@ class _CreateCategoryScreenState extends State<CreateCategoryScreen> {
                 children: [
                   hSpace(45),
                   Container(
-                    child: Text("Buat Kategori.",
+                    child: Text('create_category_title'.tr,
                       style: boldTextFont.copyWith(fontSize: fontSize(27),
                           color:  Get.isPlatformDarkMode ? Colors.white : black1),),
                     //margin: EdgeInsets.only(right: wValue(15)),
@@ -72,7 +72,7 @@ class _CreateCategoryScreenState extends State<CreateCategoryScreen> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("Nama Kategori", style: regularTextFont.copyWith(fontSize: fontSize(14), color: textColor()),),
+                        Text('name'.tr, style: regularTextFont.copyWith(fontSize: fontSize(14), color: textColor()),),
                         hSpace(5),
                         EditText(controller: controller.categoryTxtCtrl.value, textSize: fontSize(14),
                           borderColor: Get.isPlatformDarkMode ? Colors.white : black3,
@@ -95,11 +95,11 @@ class _CreateCategoryScreenState extends State<CreateCategoryScreen> {
                   Container(
                     child: Row(
                       children: [
-                        Expanded(child: ButtonBorder("Batal", Get.isPlatformDarkMode ? colorPrimary : Colors.grey, (){
+                        Expanded(child: ButtonBorder('cancel_btn'.tr, Get.isPlatformDarkMode ? colorPrimary : Colors.grey, (){
                           onWillPop();
                         }, radius: wValue(25),  height: hValue(40), fontSize: fontSize(16), fontColor: colorPrimary), flex: 1,),
                         wSpace(10),
-                        Expanded(child: Button("Simpan", colorPrimary, true, (){
+                        Expanded(child: Button('save_btn'.tr, colorPrimary, true, (){
                           controller.sendNewData();
                           onWillPop();
                         },  height: hValue(40),), flex: 1,)

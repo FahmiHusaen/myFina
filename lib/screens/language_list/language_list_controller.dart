@@ -26,6 +26,8 @@ class LanguageListController extends GetxController {
   updateLocale(Locale locale) {
     Get.updateLocale(locale);
     updateStatus(locale);
+    box.write("KEY_LANG", locale.languageCode);
+    box.write("KEY_COUN", locale.countryCode);
   }
 
   updateStatus(Locale locale){

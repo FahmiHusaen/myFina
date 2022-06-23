@@ -48,19 +48,19 @@ class _ConfigurationScreenState extends State<ConfigurationScreen> {
               children: [
                 Expanded(child: Container(
                   margin: EdgeInsets.only(right: wValue(15)),
-                  child: Text("Konfigurasi.", style: boldTextFont.copyWith(fontSize: fontSize(27),
+                  child: Text('conf_title'.tr, style: boldTextFont.copyWith(fontSize: fontSize(27),
                       color:  Get.isPlatformDarkMode ? Colors.white : black1),),
                 ), flex: 1,),
               ],
             ),
             hSpace(29),
-            itemButton("Daftar Kategori", action: (){goToPage(CategoryListScreen(), context: context);}),
-            itemButton("Bahasa", action: (){goToPage(LanguageListScreen(), context: context);}),
+            itemButton('category_list'.tr, action: (){goToPage(CategoryListScreen(), context: context);}),
+            itemButton('language'.tr, action: (){goToPage(LanguageListScreen(), context: context);}),
             hSpace(15),
             Container(
-              child: ButtonBorder("Keluar", Get.isPlatformDarkMode ? colorPrimary : Colors.grey, (){
-                showConfirmDialog(title: "Keluar Akun", content: "Apakah anda yakin ingin keluar dari akun ini?", btnPos: "Ya",
-                    btnNeg: "Batal", onClickBtnPos: (){
+              child: ButtonBorder('logout_btn'.tr, Get.isPlatformDarkMode ? colorPrimary : Colors.grey, (){
+                showConfirmDialog(title: 'account_logout'.tr, content: 'are_you_sure_logout'.tr, btnPos: 'yes_btn'.tr,
+                    btnNeg: 'cancel_btn'.tr, onClickBtnPos: (){
                       controller.logOut();
                     }, onClickBtnNeg: (){});
               }, radius: wValue(25),  height: hValue(50), fontSize: fontSize(16), fontColor: colorPrimary),

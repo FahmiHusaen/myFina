@@ -51,7 +51,7 @@ class _CategoryListScreenState extends State<CategoryListScreen> {
                     children: [
                       Expanded(child: Container(
                         margin: EdgeInsets.only(right: wValue(15)),
-                        child: Text("Atur Kategori.", style: boldTextFont.copyWith(fontSize: fontSize(27),
+                        child: Text('set_category_title'.tr, style: boldTextFont.copyWith(fontSize: fontSize(27),
                             color:  Get.isPlatformDarkMode ? Colors.white : black1),),
                       ), flex: 1,),
                       Container(
@@ -116,16 +116,6 @@ class _CategoryListScreenState extends State<CategoryListScreen> {
                 controller.removeCategory(categoryModel);
               },
             ),
-            // MeTooltip(
-            //   child: SvgPicture.asset("assets/icons/ic_info.svg", width: wValue(17),),
-            //   message: "${item.facility_type_desc}",
-            //   preferOri: PreferOrientation.down,
-            //   padding: EdgeInsets.all(wValue(13)),
-            //   decoration: BoxDecoration(
-            //     color: colorPrimary,
-            //     borderRadius: BorderRadius.circular(10.0),
-            //   ),
-            // ),
           ],
         ),
       ),
